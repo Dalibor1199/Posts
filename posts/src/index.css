@@ -38,3 +38,41 @@ code {
   color: grey;
 }
 
+
+
+.paginationBttns {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin-left: 40%;
+}
+
+.paginationBttns a {
+  padding: 10px;
+  margin: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.paginationBttns a:hover {
+  color: white;
+  border-inline-color: blue;
+}
+
+.paginationActive a {
+  color: white;
+  background-color: #2b2eff;
+}
+
+.paginationDisabled a {
+  color: grey;
+  background-color: grey;
+}
+
+.form {
+  padding: 5%;
+  width: 60%;
+  margin-left: 15%;
+
+}
+

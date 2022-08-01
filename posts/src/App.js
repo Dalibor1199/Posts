@@ -1,24 +1,53 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import ReactPaginate from "react-paginate";
+
+
 function App() {
 
 const [posts, setPosts] = useState([]);
+const [pageNumber, setPageNumber] = useState(0);
+const [search, setSearch] = useState('');
+
+const postPerPage = 12;
+const pagesVisited = pageNumber * postPerPage;
 
 const getPosts = () => {
  axios.get('https://jsonplaceholder.typicode.com/posts')
         .then((resp) => {
-          setPosts(resp.data)
-          console.log(posts)
+          const newPosts = resp.data;
+          if (search) {
+            console.log(search)
+            setPosts(newPosts.filter(post => post.title.toLowerCase().includes(search.toLocaleLowerCase())))
+          }
+          else {
+          setPosts(newPosts)
+          }
         });
 }
 
 useEffect(() => {
   getPosts()
-}, [])
+}, [search])
+
+const pageCount = Math.ceil(posts.length / postPerPage);
+
+const changePage = ({selected}) => {
+  setPageNumber(selected);
+}
+
+const handleChange = (e) => {
+  setSearch(e.target.value)
+}
+
 
   return (
+    <div>
+    <form className='form'>
+      <input type='text' name="postTitle" className="form-control" placeholder="Search" onChange={handleChange} />
+    </form>
     <section className="postList">
-      {posts.map((post)=> {
+      {posts.slice(pagesVisited, pagesVisited + postPerPage).map((post)=> {
         return <article key={post.id} className="post">
               <h4>{post.title}</h4>
               <p>{post.body}</p>
@@ -27,7 +56,15 @@ useEffect(() => {
             </svg></p>
         </article>
       })}
+
+    <ReactPaginate 
+      previousLabel = {"Previous"}
+      nextLabel = {"Next"}
+      pageCount = {pageCount}
+      onPageChange = {changePage}
+    />
     </section>
+    </div>
   );
 }
 
