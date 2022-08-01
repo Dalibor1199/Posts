@@ -17,7 +17,8 @@ code {
   column-gap: 10px;
   grid-template-columns: auto auto auto;
   padding: 10px;
-  margin: 10%;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
 .post {
@@ -40,39 +41,28 @@ code {
 
 
 
-.paginationBttns {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  margin-left: 40%;
-}
-
-.paginationBttns a {
-  padding: 10px;
-  margin: 8px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.paginationBttns a:hover {
-  color: white;
-  border-inline-color: blue;
-}
-
-.paginationActive a {
-  color: white;
-  background-color: #2b2eff;
-}
-
-.paginationDisabled a {
-  color: grey;
-  background-color: grey;
-}
-
 .form {
-  padding: 5%;
-  width: 60%;
-  margin-left: 15%;
+  padding: 3%;
+  margin-top: 5%;
+   margin-left: 8%; 
+  margin-right: 9%;
+  display: flex;
+}
 
+.form input {
+  margin-left: 1%;
+}
+
+
+
+.start {
+  background-color: darkblue;
+  color: #fff;
+  width: 100%;
+  text-align: center;
+}
+.start h1 {
+  padding: 5%;
+  font-weight: bold;
 }
 
