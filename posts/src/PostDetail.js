@@ -5,18 +5,24 @@ import Author from "./Author";
 import Comment from "./Comment";
 
 export const PostDetail = () => {
-  let { id } = useParams();
+  let {id} = useParams();
   const [post, setPost] = useState({});
   const [comments, setComments] = useState([]);
-  const [currentPostId, setCurrentPostId] = useState(0);
+  const [author, setAuthor] = useState({});
+  const [userId, setUserId] = useState(0);
+  const [postId, setPostId] = useState(0);
+
+
   
-  setCurrentPostId(id);
   const getPost = () => {
     
     axios
       .get("https://jsonplaceholder.typicode.com/posts/" + id)
       .then((resp) => {
         setPost(resp.data);
+        setPostId(resp.data.id)
+        setUserId(resp.data.userId);
+        getAuthor(resp.data.userId);
       });
   };
 
@@ -27,25 +33,35 @@ export const PostDetail = () => {
           setComments(resp.data);
         })
   }
-
+  
+  
+  
   useEffect(() => {
     getPost();
     getComments();
-  }, []);
-
-  const previosPost = () => {
-    id = id - 1;
+  }, [postId]);
+  
+  const getAuthor = (id) => {
+    axios.get("https://jsonplaceholder.typicode.com/users/"+id)
+          .then(resp => {
+            setAuthor(resp.data)
+          })
   }
 
-  const userId = post.userId;
+  const nextPost = () => {
+    setPostId(postId+1);
+    console.log(postId);
+
+  }
+
   return (
     <div className="postDetail">
       <h1>{post.title}</h1>
       <p>{post.body}</p>
       <hr></hr>
-      <button onClick={previosPost}>Previous</button>
-      <button>Next</button>
-      <h1>Author</h1>
+      <button>Previous</button>
+      <button onClick={nextPost}>Next</button>
+      <Author {...author} />
       <h3>Comments</h3>
       {comments.map(el => {
         return <Comment key={el.id} {...el}/>

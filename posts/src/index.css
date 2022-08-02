@@ -114,4 +114,27 @@ code {
   padding: 8px;
 }
 
+.author {
+  height: 30%;
+  background-color: #E8E8E8;
+  display: grid;
+  grid-template-columns: auto auto;
+
+}
+
+
+.author label {
+  padding: 10px;
+  margin-top: 10px;
+  margin-left: 50px;
+  color: grey;
+}
+
+.author h6 {
+   padding: 5px;
+   margin-left: 55px;
+   font-weight: bold; 
+   margin-bottom: 20px;
+}
+
 
