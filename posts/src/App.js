@@ -1,20 +1,22 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import ReactPaginate from "react-paginate";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Routes
+} from "react-router-dom";
+import { PostDetail } from "./PostDetail";
 import { PostList } from "./PostList";
 
-
 function App() {
-
   return (
-    <div>
-      <div className="start">
-        <h1>Posts</h1>
-      </div>
-      <PostList/>
-    </div>
-  )
-
+    <Router>
+      <Routes>
+          <Route exact path="/" element={<PostList />}/>
+          <Route path="/post/:id" element={<PostDetail/>} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
