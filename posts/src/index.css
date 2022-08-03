@@ -70,6 +70,7 @@ code {
 .start h1 {
   padding: 5%;
   font-weight: bold;
+  margin-right: 60%;
 }
 
 .postDetail {
@@ -103,6 +104,7 @@ code {
   /* width: 70%; */
   height: 30%;
   background-color: #E8E8E8;
+  margin-top: 25px;
 }
 
 .comment h4 {
@@ -119,6 +121,7 @@ code {
   background-color: #E8E8E8;
   display: grid;
   grid-template-columns: auto auto;
+  margin-top: 15px;
 
 }
 

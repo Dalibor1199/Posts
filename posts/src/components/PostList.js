@@ -3,51 +3,10 @@ import { useEffect, useState } from "react";
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const PostList = () => {
-  const [posts, setPosts] = useState([]);
-  const [search, setSearch] = useState("");
-  const [authors, setAuthors] = useState([]);
+export const PostList = ({posts, authors, handleChangeAuthor, search}) => {
 
-  const getPosts = () => {
-    axios.get("https://jsonplaceholder.typicode.com/posts").then((resp) => {
-      const newPosts = resp.data;
-      if (search) {
-        console.log(search);
-        setPosts(
-          newPosts.filter((post) =>
-            post.title.toLowerCase().includes(search.toLocaleLowerCase())
-          )
-        );
-      } else {
-        setPosts(newPosts);
-      }
-    });
-  };
 
-  const getAuthors = () => {
-    axios.get("https://jsonplaceholder.typicode.com/users").then((resp) => {
-      console.log(resp.status);
-      setAuthors(resp.data);
-    });
-  };
-
-  useEffect(() => {
-    getAuthors();
-    getPosts();
-  }, [search]);
-
-  const handleChange = (e) => {
-    setSearch(e.target.value);
-  };
-
-  const handleChangeAuthor = (e) => {
-    const authorId = e.target.value;
-    axios
-      .get("https://jsonplaceholder.typicode.com/posts/?userId=" + authorId)
-      .then((resp) => {
-        setPosts(resp.data);
-      });
-  };
+ 
 
   return (
     <div>
@@ -60,13 +19,13 @@ export const PostList = () => {
           name="postTitle"
           className="form-control"
           placeholder="Search"
-          onChange={handleChange}
+          onChange={(e)=>{search(e.target.value)}}
         />
         <select
           placeholder="Filter by Author name"
           name="authorId"
           className="form-control"
-          onChange={handleChangeAuthor}
+          onChange={(e)=>{handleChangeAuthor(e.target.value)}}
         >
           {authors.map((author) => {
             return (
@@ -82,8 +41,8 @@ export const PostList = () => {
           return (
             <div  key={post.id} className="post link">
               <h4>{post.title}</h4>
-              <p>{post.body.slice("/")}</p>
-              <Link to={`/post/${post.id}`}>Read more{" "}
+              <p>{post.body}</p>
+              <Link to={`/post/${post.id}`}><button className="btn btn-light">Read more{" "}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -97,6 +56,7 @@ export const PostList = () => {
                   d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
                 />
               </svg>
+              </button>
               </Link>
             </div>
             
