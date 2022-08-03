@@ -2,8 +2,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import React from "react";
 import { Link } from "react-router-dom";
+import Pagination from "./Pagination";
 
-export const PostList = ({posts, authors, handleChangeAuthor, search}) => {
+export const PostList = ({posts, authors, handleChangeAuthor, search, totalPosts, postsPerPage, paginate}) => {
 
 
  
@@ -63,6 +64,11 @@ export const PostList = ({posts, authors, handleChangeAuthor, search}) => {
           );
         })}
       </section>
+      <Pagination
+        totalPosts={100}
+        postsPerPage={postsPerPage}
+        paginate={paginate}
+      />
     </div>
   );
 };

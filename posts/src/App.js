@@ -11,7 +11,7 @@ import { PostDetail } from "./components/PostDetail";
 import { PostList } from "./components/PostList";
 
 function App() {
-  const [posts, setPosts] = useState([]);
+  //const [posts, setPosts] = useState([]);
   const [authors, setAuthors] = useState([]);
   const [search, setSearch] = useState("");
   const [postsToDisplay, setPostsToDisplay] = useState([]);
@@ -24,7 +24,10 @@ function App() {
 
   const getPosts = async () => {
     const resp = await axios.get("https://jsonplaceholder.typicode.com/posts");
-    setPosts(resp.data);
+    return resp.data;
+    // const myPosts = resp.data.slice(indexOfFirstPage, indexOfLastPage);
+    // setPostsToDisplay(myPosts.filter((post) => post.title.toLowerCase().includes(search.toLocaleLowerCase())));
+    
     //const allPosts = resp.data;
     // if (search) {
     //   setPosts(
@@ -37,15 +40,12 @@ function App() {
     // }
   };
 
-  const getPostsToDisplay = async() => {
-     await getPosts();
-     const myPosts = posts.slice(indexOfFirstPage, indexOfLastPage);
-     if (search) {
-        setPostsToDisplay(myPosts.filter((post) => post.title.toLowerCase().includes(search.toLocaleLowerCase())));
-     }else {
-      
-       setPostsToDisplay(myPosts);
-     }
+  const allPosts = getPosts();
+
+  const getPostsToDisplay = async () => {
+     const allPosts = await getPosts();
+     const myPosts = allPosts.slice(indexOfFirstPage, indexOfLastPage);
+     setPostsToDisplay(myPosts.filter((post) => post.title.toLowerCase().includes(search.toLocaleLowerCase())));
     console.log(postsToDisplay);
   }
 
@@ -58,7 +58,7 @@ function App() {
     axios
       .get("https://jsonplaceholder.typicode.com/posts/?userId=" + id)
       .then((resp) => {
-        setPosts(resp.data);
+        setPostsToDisplay(resp.data);
       });
   };
 
@@ -66,12 +66,18 @@ function App() {
   useEffect(() => {
     getPostsToDisplay();
     getAuthors();
-  }, [search]);
+    console.log("poziva se")
+  }, [search, currentPage]);
   
   
   const handleChange = (value) => {
     setSearch(value);
   };
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    console.log(pageNumber);
+  }
 
 
 
@@ -87,6 +93,9 @@ function App() {
               authors={authors}
               handleChangeAuthor={handleChangeAuthor}
               search={handleChange}
+              totalPosts={allPosts.length}
+              postsPerPage={postsPerPage}
+              paginate={paginate}
             />
           }
         />
