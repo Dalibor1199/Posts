@@ -4,7 +4,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Pagination from "./Pagination";
 
-export const PostList = ({posts, authors, handleChangeAuthor, search, totalPosts, postsPerPage, paginate}) => {
+export const PostList = ({posts, authors, handleChangeAuthor, search, totalPosts, postsPerPage, paginate, currentPage}) => {
 
 
  
@@ -65,9 +65,10 @@ export const PostList = ({posts, authors, handleChangeAuthor, search, totalPosts
         })}
       </section>
       <Pagination
-        totalPosts={100}
+        totalPosts={totalPosts}
         postsPerPage={postsPerPage}
         paginate={paginate}
+        currentPage={currentPage}
       />
     </div>
   );

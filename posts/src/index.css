@@ -27,6 +27,7 @@ code {
   padding: 1rem 2rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   margin: 5%;
+  width: 350px;
   
 }
 .post h4 {
@@ -144,6 +145,19 @@ code {
   /* margin-left: 80%; */
   margin-top: 0px;
   margin-left: 77%;
+}
+
+.paginate {
+  align-items: center;
+  margin-left: 35%;
+}
+
+a:active {
+  background-color: black;
+}
+
+button {
+  border: none;
 }
 
 
