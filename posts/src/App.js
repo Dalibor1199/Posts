@@ -18,6 +18,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(12);
   const [authorId, setAuthorId]=useState(0);
+  //const [totalPosts, setTotalPosts] = useState(0);
   
   const indexOfLastPage = currentPage * postsPerPage;
   const indexOfFirstPage = indexOfLastPage - postsPerPage;
@@ -65,6 +66,7 @@ function App() {
   const handleChangeAuthor = async (id) => {
     const resp = await axios.get("https://jsonplaceholder.typicode.com/posts/?userId="+id);
     setAuthorId(id);
+    setCurrentPage(1);
     return resp.data;
   };
 
@@ -85,8 +87,10 @@ function App() {
     setCurrentPage(pageNumber);
     console.log(pageNumber);
   }
-
-  let totalPosts = posts.length;
+  
+  
+  let totalPosts = authorId===0 ? posts.length : postsToDisplay.length;
+  //let totalPosts = posts.length;
 
   return (
     <Router>
