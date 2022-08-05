@@ -1,5 +1,4 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+
 import React from "react";
 import { Link } from "react-router-dom";
 import Pagination from "./Pagination";
@@ -28,6 +27,7 @@ export const PostList = ({posts, authors, handleChangeAuthor, search, totalPosts
           className="form-control"
           onChange={(e)=>{handleChangeAuthor(e.target.value)}}
         >
+          <option disabled selected hidden>Filter by author name</option>
           {authors.map((author) => {
             return (
               <option key={author.id} value={author.id}>
@@ -40,6 +40,7 @@ export const PostList = ({posts, authors, handleChangeAuthor, search, totalPosts
       <section className="postList">
         {posts.map((post) => {
           return (
+            
             <div  key={post.id} className="post link">
               <h4>{post.title}</h4>
               <p>{post.body}</p>

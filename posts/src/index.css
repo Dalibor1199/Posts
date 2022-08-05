@@ -60,6 +60,13 @@ code {
   background-color: lightgray;
 }
 
+.form option {
+  background-color: lightgray;
+  color: lightgray;
+  
+}
+
+
 
 
 .start {
@@ -69,7 +76,7 @@ code {
   text-align: center;
 }
 .start h1 {
-  padding: 5%;
+  padding: 7%;
   font-weight: bold;
   margin-right: 60%;
 }
@@ -104,9 +111,8 @@ code {
 }
 
 .comment {
-  /* width: 70%; */
   height: 30%;
-  background-color: #E8E8E8;
+  background-color: #f2f2f2;
   margin-top: 25px;
 }
 
@@ -121,7 +127,7 @@ code {
 
 .author {
   max-height: 30%;
-  background-color: #E8E8E8;
+  background-color: #f2f2f2;
   display: grid;
   grid-template-columns: auto auto;
   margin-top: 15px;
@@ -133,7 +139,7 @@ code {
   padding: 10px;
   margin-top: 10px;
   margin-left: 50px;
-  color: grey;
+  color: #808080;
 }
 
 .author h6 {
@@ -154,9 +160,8 @@ code {
   margin-left: 38%;
 }
 
-.paginate button:active {
-  border-bottom: solid;
-  border-color: blue;
+select:not(:checked) {
+  color: gray;
 }
 
 

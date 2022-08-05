@@ -1,13 +1,8 @@
 import React from "react";
 
 const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage }) => {
-  const pageNumbers = [];
 
-  for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
-    pageNumbers.push(i);
-  }
-
-  console.log(Math.ceil(totalPosts/postsPerPage));
+  const totalPages = Math.ceil(totalPosts/postsPerPage);
 
   return (
     <div className="paginate">
@@ -57,6 +52,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage }) => {
             </a>
           </li>
         )}
+        {currentPage<totalPages &&
         <li className="page-item">
           <a
             className="btn btn-light"
@@ -66,7 +62,8 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage }) => {
             {currentPage}
           </a>
         </li>
-        {currentPage < (Math.ceil(totalPosts / postsPerPage) - 1) && (
+        }
+        {currentPage < (totalPages - 1) && (
           <li className="page-item">
             <a
               className="btn btn-light"
@@ -77,7 +74,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage }) => {
             </a>
           </li>
         )}
-        {currentPage < (Math.ceil(totalPosts / postsPerPage) - 2) && (
+        {currentPage < (totalPages - 2) && (
           <li className="page-item">
             <a
               className="btn btn-light"
@@ -88,20 +85,22 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage }) => {
             </a>
           </li>
         )}
+        {totalPages>1 &&
         <li className="page-item">
           <a className="btn btn-light">...</a>
         </li>
+        }
         <li className="page-item">
           <a
             className="btn btn-light"
-            onClick={() => paginate(Math.ceil(totalPosts / postsPerPage))}
+            onClick={() => paginate(totalPages)}
             href="#"
           >
-            {Math.ceil(totalPosts / postsPerPage)}
+            {totalPages}
           </a>
         </li>
 
-        {currentPage < Math.ceil(totalPosts / postsPerPage) && (
+        {currentPage < totalPages && (
           <li>
             <a
               className="btn btn-light"

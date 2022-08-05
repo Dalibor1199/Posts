@@ -18,7 +18,6 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(12);
   const [authorId, setAuthorId]=useState(0);
-  //const [totalPosts, setTotalPosts] = useState(0);
   
   const indexOfLastPage = currentPage * postsPerPage;
   const indexOfFirstPage = indexOfLastPage - postsPerPage;
@@ -28,19 +27,6 @@ function App() {
     const resp = await axios.get("https://jsonplaceholder.typicode.com/posts");
     setPosts(resp.data);
     return resp.data;
-    // const myPosts = resp.data.slice(indexOfFirstPage, indexOfLastPage);
-    // setPostsToDisplay(myPosts.filter((post) => post.title.toLowerCase().includes(search.toLocaleLowerCase())));
-    
-    //const allPosts = resp.data;
-    // if (search) {
-    //   setPosts(
-    //     allPosts.filter((post) =>
-    //       post.title.toLowerCase().includes(search.toLocaleLowerCase())
-    //     )
-    //   );
-    // } else {
-    //   setPosts(resp.data);
-    // }
   };
 
   const getPostsToDisplay = async () => {
@@ -75,7 +61,6 @@ function App() {
   useEffect(() => {
     getPostsToDisplay();
     getAuthors();
-    console.log("poziva se")
   }, [search, currentPage, authorId]);
   
   
@@ -85,12 +70,10 @@ function App() {
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
-    console.log(pageNumber);
   }
   
   
   let totalPosts = authorId===0 ? posts.length : postsToDisplay.length;
-  //let totalPosts = posts.length;
 
   return (
     <Router>

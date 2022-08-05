@@ -9,33 +9,25 @@ export const PostDetail = () => {
   const [post, setPost] = useState({});
   const [comments, setComments] = useState([]);
   const [author, setAuthor] = useState({});
- // const [userId, setUserId] = useState(0);
   const [postId, setPostId] = useState(0);
 
-  const getPost = async() => {
-    await axios
-      .get(
-        "https://jsonplaceholder.typicode.com/posts/" +
-          (postId === 0 ? id : postId)
-      )
-      .then((resp) => {
-        setPost(resp.data);
-        setPostId(resp.data.id);
-        //setUserId(resp.data.userId);
-        getAuthor(resp.data.userId);
-      });
+  const getPost = async () => {
+    const resp = await axios.get(
+      "https://jsonplaceholder.typicode.com/posts/" +
+        (postId === 0 ? id : postId)
+    );
+    setPost(resp.data);
+    setPostId(resp.data.id);
+    getAuthor(resp.data.userId);
   };
 
-  const getComments = async() => {
-    await axios
-      .get(
-        "https://jsonplaceholder.typicode.com/comments?postId=" +
-          (postId === 0 ? id : postId)
-      )
-      .then((resp) => {
-        console.log(resp);
-        setComments(resp.data);
-      });
+  const getComments = async () => {
+    const resp = await axios.get(
+      "https://jsonplaceholder.typicode.com/comments?postId=" +
+        (postId === 0 ? id : postId)
+    );
+
+    setComments(resp.data);
   };
 
   useEffect(() => {
@@ -43,24 +35,22 @@ export const PostDetail = () => {
     getComments();
   }, [postId]);
 
-  const getAuthor = async(id) => {
-   await axios
-      .get("https://jsonplaceholder.typicode.com/users/" + id)
-      .then((resp) => {
-        setAuthor(resp.data);
-      });
+  const getAuthor = async (id) => {
+    const resp = await axios.get(
+      "https://jsonplaceholder.typicode.com/users/" + id
+    );
+
+    setAuthor(resp.data);
   };
 
   const nextPost = () => {
     const pomId = postId + 1;
     setPostId(pomId);
-    console.log(postId);
   };
 
   const previousPost = () => {
     const pomId = postId - 1;
     setPostId(pomId);
-    console.log(postId);
   };
 
   return (
